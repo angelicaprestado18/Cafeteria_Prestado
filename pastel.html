@@ -1,0 +1,199 @@
+<html>
+<head>
+<title> Pasteleria </title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: white;
+    }
+
+    header {
+        background: purple;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-size: 24px;
+    }
+
+    .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .producto {
+        background: white;
+        border-radius: 10px;
+        padding: 15px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .producto img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    }
+
+    .producto h3 {
+        margin: 10px 0;
+    }
+
+    .precio {
+        color: #e67e22;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    button {
+        background: pink;
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #ca6f1e;
+    }
+
+    .carrito {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        background: #fdf2e9;
+        padding: 15px;
+        box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+        overflow-y: auto;
+    }
+
+    .carrito h2 {
+        text-align: center;
+    }
+
+    .item {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+/* TOAST */
+
+.toast{
+
+    position: fixed;
+
+    bottom: 30px;
+
+    right: 30px;
+
+    background:
+    linear-gradient(
+    180deg,
+    #6D4C41,
+    #3E2723
+    );
+
+    color: white;
+
+    padding: 18px 25px;
+
+    border-radius: 15px;
+
+    font-size: 18px;
+
+    box-shadow:
+    0px 8px 20px rgba(0,0,0,0.4);
+
+    opacity: 0;
+
+    transition: 0.4s;
+
+    z-index: 3000;
+}
+
+.toast.mostrar{
+
+    opacity: 1;
+}
+
+
+
+</style>
+</head>
+<body>
+
+<header> Pasteleria </header>
+
+<div class="container">
+
+    <div class="producto">
+	<img src="https://lscpasteleria.mx/cdn/shop/files/92a48364-3fa3-422b-ad4e-5a883c9f1320.jpg?v=1731470390">
+        <h3> Mil hojas </h3>
+        <p> Pastel con hojas de ojaldre y relleno de frutos rojos </p>
+        <p class="precio">$450</p>
+        <button onclick="agregar('Mil hojas',450)">Agregar</button>
+    </div>
+
+    <div class="producto">
+	<img src="https://mdemotivos.com.mx/wp-content/uploads/2025/06/pasteles-personalizados-de-cumpleanos-con-flores.jpg">
+        <h3> Pastel de cumpelaños </h3>
+        <p> Pasteles bajo pedido </p>
+        <p class="precio">$800</p>
+        <button onclick="agregar('Pastel Cumple',800)">Agregar</button>
+    </div>
+
+    <div class="producto">
+	<img src="https://www.cocinadelirante.com/800x600/filters:format(webp):quality(75)/sites/default/files/images/2023/08/receta-de-pastel-de-chocolate-facil.jpg">
+        <h3> Pastel de chocolate </h3>
+        <p>Delicioso pastel de chocolate con frutos rojos</p>
+        <p class="precio">$450</p>
+        <button onclick="agregar('Pastel de chocolate',450)">Agregar</button>
+    </div>
+
+    <div class="producto">
+	<img src="https://thesweetmolcajete.com/wp-content/uploads/2020/06/WPRM-Receta-de-Pastel-de-Tres-Leches.jpg">
+        <h3> Pastel de 3 leches </h3>
+        <p> Pastel de 3 leches con crema batida y relleno de frutos rojos</p>
+        <p class="precio">$450</p>
+        <button onclick="agregar('Pastel 3 leches',450)">Agregar</button>
+    </div>
+
+    <div class="producto">
+	<img src="https://lasdeliciasdemariel.mx/wp-content/uploads/2023/09/21_P-RED-VELVET-5252.jpg">
+        <h3> Red velvet </h3>
+        <p> Pastel red velvet con relleno dulce de crema y frutas de temporada</p>
+        <p class="precio">$400</p>
+        <button onclick="agregar('Red velvet',400)">Agregar</button>
+    </div>
+
+    <div class="producto">
+	<img src="https://cdn7.kiwilimon.com/recetaimagen/32008/960x640/36859.jpg.jpg">
+        <h3> Pastel Imposible </h3>
+        <p> Un pastel hecho con flan y pan de chocolate, con una decoración sutil de frutas</p>
+        <p class="precio">$500</p>
+        <button onclick="agregar('Pastel Imposible',500)">Agregar</button>
+    </div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div class="toast"
+id="toast">
+
+✅ Producto agregado
+
+</div>
+
+
+<script src="carrito.js"></script>
+</body>
+</html>

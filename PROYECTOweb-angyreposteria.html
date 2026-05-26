@@ -1,0 +1,687 @@
+﻿<html>
+		<title> PROYECTO ANGY </TITLE>
+
+<head>
+
+<style>
+
+body{
+    font-family: Arial;
+}
+
+
+
+/* ICONO */
+
+.iconoCarrito{
+
+    position: fixed;
+
+    top: 25px;
+
+    right: 25px;
+
+    background: linear-gradient(
+    180deg,
+    #6D4C41,
+    #3E2723
+    );
+
+    color: white;
+
+    width: 75px;
+
+    height: 75px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 32px;
+
+    cursor: pointer;
+
+    z-index: 1000;
+
+    box-shadow:
+    0px 8px 20px rgba(0,0,0,0.4);
+
+    transition: 0.3s;
+}
+
+.iconoCarrito:hover{
+
+    transform: scale(1.1);
+}
+
+
+
+/* CONTADOR */
+
+#contador{
+
+    position: absolute;
+
+    top: -5px;
+
+    right: -5px;
+
+    background: #D2691E;
+
+    width: 28px;
+
+    height: 28px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 14px;
+}
+
+
+
+/* PANEL */
+
+.panelCarrito{
+
+    position: fixed;
+
+    top: 0;
+
+    right: -450px;
+
+    width: 400px;
+
+    height: 100vh;
+
+    background:
+    linear-gradient(
+    180deg,
+    #4E342E,
+    #2B1B17
+    );
+
+    color: white;
+
+    padding: 25px;
+
+    transition: 0.4s;
+
+    overflow-y: auto;
+
+    z-index: 999;
+
+    box-shadow:
+    -5px 0px 25px rgba(0,0,0,0.5);
+}
+
+.panelCarrito.activo{
+
+    right: 0;
+}
+
+
+
+/* HEADER */
+
+.encabezadoCarrito{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.encabezadoCarrito h2{
+
+    font-size: 32px;
+
+    color: #FFE0B2;
+}
+
+.cerrar{
+
+    background: none;
+
+    border: none;
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+
+/* ITEMS */
+
+.item{
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-bottom: 15px;
+
+    backdrop-filter: blur(5px);
+
+    font-size: 18px;
+}
+
+
+
+/* TOTAL */
+
+.totalBox{
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 25px;
+
+    font-size: 25px;
+
+    color: #FFD7B5;
+}
+
+
+
+/* BOTONES */
+
+.btnPagar,
+.btnFinalizar{
+
+    width: 100%;
+
+    background: #D2691E;
+
+    color: white;
+
+    border: none;
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-top: 20px;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.btnPagar:hover,
+.btnFinalizar:hover{
+
+    background: #A0522D;
+
+    transform: scale(1.02);
+}
+
+
+
+/* SELECT */
+
+select{
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    margin-top: 15px;
+
+    font-size: 16px;
+}
+
+
+
+/* INPUTS */
+
+input{
+
+    width: 100%;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    border: none;
+
+    margin-top: 10px;
+
+    font-size: 16px;
+}
+
+
+
+/* PAGO */
+
+.pagoBox{
+
+    background: rgba(255,255,255,0.1);
+
+    padding: 15px;
+
+    border-radius: 15px;
+
+    margin-top: 15px;
+
+    display: none;
+}
+
+
+
+/* MENSAJE FINAL */
+
+.mensajeCompra{
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: rgba(0,0,0,0.6);
+
+    display: none;
+
+    justify-content: center;
+
+    align-items: center;
+
+    z-index: 2000;
+}
+
+.mensajeContenido{
+
+    background: white;
+
+    width: 420px;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    text-align: center;
+
+    color: #2E7D32;
+
+    animation: aparecer 0.4s ease;
+}
+
+.paloma{
+
+    font-size: 80px;
+}
+
+@keyframes aparecer{
+
+    from{
+
+        transform: scale(0.5);
+
+        opacity: 0;
+    }
+
+    to{
+
+        transform: scale(1);
+
+        opacity: 1;
+    }
+}
+
+/* TOAST */
+
+.toast{
+
+    position: fixed;
+
+    bottom: 30px;
+
+    right: 30px;
+
+    background: #4E342E;
+
+    color: white;
+
+    padding: 18px 25px;
+
+    border-radius: 15px;
+
+    font-size: 18px;
+
+    box-shadow:
+    0px 8px 20px rgba(0,0,0,0.4);
+
+    opacity: 0;
+
+    transition: 0.4s;
+
+    z-index: 3000;
+}
+
+.toast.mostrar{
+
+    opacity: 1;
+}
+
+</style>
+
+
+
+
+	</HEAD>
+	<BODY>
+
+	<CENTER>
+	<TABLE BORDER=0 >
+
+	<TR>
+
+	<TD COLSPAN=5 BGCOLOR="SALMON" HEIGHT=80><FONT COLOR="BLACK" FACE="LETTERS FOR LEARNERS" SIZE=6><CENTER> PASTECCERIA TOLENTINO </font></CENTER> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD><CENTER><IMG SRC="C:\Users\hp\Desktop\logo-angy.png" WIDTH=300 HEIGHT=300></CENTER> </TD>
+	<TD BGCOLOR="PLUM"><P ALIGN="CENTER"><FONT COLOR="PINK" FACE="SUNDAY BEST" SIZE=5><A HREF="pastel.html" </A> PASTELERIA </FONT></P></TD>
+	<TD BGCOLOR="PLUM"><P ALIGN="CENTER"><FONT COLOR="PINK" FACE="SUNDAY BEST" SIZE=5><A HREF="panaderia.html" </A> PANADERIA </FONT></P> </TD>
+	<TD BGCOLOR="PLUM"><P ALIGN="CENTER"><FONT COLOR="PINK" FACE="SUNDAY BEST" SIZE=5><A HREF="chocolate.html" </A> CHOCOLATELERIA </FONT></P> </TD>
+	<TD BGCOLOR="PLUM"><P ALIGN="CENTER"><FONT COLOR="PINK" FACE="SUNDAY BEST" SIZE=5><A HREF="churros.html" </A> CHURRERIA </FONT></P> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD COLSPAN=2><CENTER><IMG SRC="https://proingra.com/wp-content/uploads/2021/10/21-OCT-BRAHMAN_3.jpg" WIDTH=600 HEIGHT=300></CENTER> </TD>
+	<TD> </TD>
+	<TD COLSPAN=2><CENTER><IMG SRC="https://mandolina.co/wp-content/uploads/2022/08/Panaderia-y-reposteria-dulce-02.png" WIDTH=400 HEIGHT=200></CENTER>  </TD>
+	
+
+	</TR>
+
+	<TR>
+
+	<TD ROWSPAN=4 COLSPAN=3><P ALIGN="LEFT"><IMG SRC="https://i.pinimg.com/originals/05/e8/21/05e82122afe7d349dad88890f280c06f.jpg" WIDTH=800 HEIGHT=600></P> </TD>
+	<TD COLSPAN=2><CENTER><IMG SRC="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8teQ-21dDu8JGa3rBoGvyoymIYnvaw4hMdA&s" WIDTH=300 HEIGHT=200></CENTER> </TD>
+	
+	</TR>
+
+	<tr>
+
+	<td COLSPAN=2><CENTER><IMG SRC="https://thefoodtech.com/wp-content/uploads/2023/10/PANADERIA-PRINCIPAL-1.jpg" WIDTH=300 HEIGHT=200></CENTER>  </td>
+
+	</tr>
+
+	<TR>
+
+	<TD COLSPAN=2><CENTER><IMG SRC="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLirEvbp_psYTe1m3LFAsCYtgCw-mYjdYtmA&s" WIDTH=300 HEIGHT=200></CENTER> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD COLSPAN=2><CENTER><IMG SRC="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6EHTjR_zD9kb9WJVOLtAMHv8BIfSaffLPVw&s" WIDTH=300 HEIGHT=200></CENTER> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD COLSPAN=5 BGCOLOR="SALMON" HEIGHT=40> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD><P ALIGN="RIGHT"><FONT COLOR="PINK" FACE="SUNDAY BEST" SIZE=4> Encuentranos tambien en: </FONT></P></TD>
+	<TD><CENTER><IMG SRC="https://upload.wikimedia.org/wikipedia/commons/c/cd/Facebook_logo_%28square%29.png" WIDTH=100 HEIGHT=100></CENTER> </TD>
+	<TD><CENTER><IMG SRC="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/960px-Instagram_logo_2022.svg.png" WIDTH=100 HEIGHT=100></CENTER> </TD>
+	<TD><CENTER><IMG SRC="https://cdn.pixabay.com/photo/2017/08/23/11/30/twitter-2672572_1280.jpg" WIDTH=100 HEIGHT=100></CENTER> </TD>
+	<TD><CENTER><IMG SRC="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Pinterest.svg/960px-Pinterest.svg.png" WIDTH=100 HEIGHT=100></CENTER> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD COLSPAN=5 BGCOLOR="SALMON" HEIGHT=40> </TD>
+
+	</TR>
+
+	<TR>
+	
+	<TD COLSPAN=5><CENTER><IMG SRC="C:\Users\hp\OneDrive\Imágenes\Screenshots\Captura de pantalla 2026-03-13 094941.png" WIDTH=800 HEIGHT=500></CENTER> </TD>
+
+	</TR>
+
+	<TR>
+
+	<TD COLSPAN=5><P ALIGN="CENTER"><FONT COLOR="SALMON" FACE="SUNDAY BEST" SIZE=5> Patecceria Tolentina </FONT><BR>
+	<FONT COLOR="BLACK" FACE="LETTERS FOR LEARNERS" SIZE=6> Centro Comercial Mundo E <BR>
+	Local #511 a un costado de Starbucks <br>
+	Consumo en el lugar y para llevar <br>
+	Contamos con las mejores medidas de seguridad <br>
+	<b> "Ven y prueba nuestra alta reposteria" </b></font></p></TD>
+
+	</TR>
+
+	</CENTER>
+	</TABLE>
+
+<!-- ICONO CARRITO -->
+
+<div class="iconoCarrito"
+onclick="abrirCarrito()">
+
+🛒
+
+<span id="contador">0</span>
+
+</div>
+
+
+
+<!-- PANEL DEL CARRITO -->
+
+<div class="panelCarrito"
+id="panelCarrito">
+
+    <!-- HEADER -->
+
+    <div class="encabezadoCarrito">
+
+        <h2>☕ Tu Orden</h2>
+
+        <button class="cerrar"
+        onclick="cerrarCarrito()">
+
+        ✖
+
+        </button>
+
+    </div>
+
+
+
+    <!-- PRODUCTOS -->
+
+    <div id="lista"></div>
+
+
+
+    <!-- TOTAL -->
+
+    <div class="totalBox">
+
+        <h3>Total:</h3>
+
+        <span>$<span id="total">0</span></span>
+
+    </div>
+
+
+
+    <!-- BOTON PAGAR -->
+
+    <button class="btnPagar"
+    onclick="mostrarPago()">
+
+    Continuar al pago
+
+    </button>
+
+
+
+    <!-- PAGO -->
+
+    <div id="seccionPago"
+    style="display:none;">
+
+        <h3>Método de pago</h3>
+
+
+
+        <select id="metodoPago"
+        onchange="cambiarMetodo()">
+
+            <option value="">
+                Selecciona
+            </option>
+
+            <option value="efectivo">
+                Efectivo
+            </option>
+
+            <option value="transferencia">
+                Transferencia
+            </option>
+
+            <option value="tarjeta">
+                Tarjeta
+            </option>
+
+        </select>
+
+
+
+        <!-- TRANSFERENCIA -->
+
+        <div id="transferencia"
+        class="pagoBox">
+
+            <p><b>Banco:</b> BBVA</p>
+
+            <p><b>Cuenta:</b> 123456789</p>
+
+            <p><b>CLABE:</b>
+            012345678901234567</p>
+
+        </div>
+
+
+
+        <!-- TARJETA -->
+
+        <div id="tarjeta"
+        class="pagoBox">
+
+            <input type="text"
+            placeholder="Número de tarjeta">
+
+            <input type="text"
+            placeholder="Nombre del titular">
+
+            <input type="text"
+            placeholder="MM/AA">
+
+            <input type="text"
+            placeholder="CVV">
+
+        </div>
+
+
+
+        <!-- FINALIZAR -->
+
+        <button class="btnFinalizar"
+        onclick="finalizarCompra()">
+
+        Finalizar compra
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- MENSAJE FINAL -->
+
+<div class="mensajeCompra"
+id="mensajeCompra">
+
+    <div class="mensajeContenido">
+
+        <div class="paloma">
+
+        ✅
+
+        </div>
+
+        <h2>
+
+        Tu compra se realizó correctamente
+
+        </h2>
+
+    </div>
+
+</div>
+
+
+
+<!-- TOAST -->
+
+<div class="toast"
+id="toast">
+
+✅ Producto agregado al carrito
+
+</div>
+
+
+
+<script src="carrito.js"></script>
+
+	</BODY>
+</HTML>
